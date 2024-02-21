@@ -1,20 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import MyButton from "../components/MyButton";
 import CardItem from "../components/CardItem";
-import getAllToDo from "../services/DataService";
+// import getAllToDo from "../services/DataService";
+import { Cards } from "../services/Data";
 import { useEffect, useState } from "react";
 import { Flex } from "antd";
+import { ICards } from "../services/Data"; 
 
-interface ICard {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
+
 
 export default function Boards(): JSX.Element {
   const [loading, setLoading] = useState(false);
-  const [cards, setCards] = useState([]);
+  // const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState(Cards);
+
 
   const navigate = useNavigate();
 
@@ -23,23 +22,23 @@ export default function Boards(): JSX.Element {
   }
 
   useEffect(() => {
-    const todos = getAllToDo();
-    todos.then((res) => {
-      console.log(res);
-      setCards(res);
-    });
+    // const todos = getAllToDo();
+    // todos.then((res) => {
+    //   console.log(res);
+    //   setCards(res);
+    // });
+   
   }, []);
 
   return (
     <div>
-      <h3>Boards</h3>
-      <MyButton onClick={handleClick}>На Главную</MyButton>
-
-      <Flex wrap="wrap" gap="small" justify="space-between" align="center">
+      <h1>Boards</h1>
+      <Flex wrap="wrap" gap="small" justify="space-around" align="center">
         {loading && <p>Loading ... </p>}
         {!loading &&
-          cards.map((card: ICard) => <CardItem card={card} key={card.id} />)}
+          cards.map((card: ICards) => <CardItem card={card} key={card.userId} />)}
       </Flex>
+      <MyButton onClick={handleClick}>На Главную</MyButton>
     </div>
   );
 }
