@@ -4,12 +4,13 @@ import { MouseEventHandler } from "react"
 
 interface MyButtonProps {
     children: string,
-    onClick: MouseEventHandler
+    onClick: MouseEventHandler,
+    // style: string
 }
 
 
 
 export default function MyButton ({children, onClick}: MyButtonProps) {
-    return <Button type='primary' onClick={onClick} style={{margin: '2rem 0'}}>{children}</Button>
+    return <Button type='primary' onClick={onClick} style={{margin: '0'}}>{children}</Button>
 }
 

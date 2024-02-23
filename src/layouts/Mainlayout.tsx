@@ -21,7 +21,7 @@ export default function MainLayout(): JSX.Element {
           style={{ flex: 1, minWidth: 0 }}
         />
       </Header>
-      <Content style={{ padding: "48px 48px" }}>
+      <Content style={{ padding: "2rem 2rem" }}>
         <Outlet />
       </Content>
       <Footer style={{ textAlign: "center" }}>

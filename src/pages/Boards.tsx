@@ -1,19 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import MyButton from "../components/MyButton";
-import CardItem from "../components/CardItem";
-// import getAllToDo from "../services/DataService";
-import { Cards } from "../services/Data";
+import {getAllTasks, getUserTask} from "../services/DataService";
 import { useEffect, useState } from "react";
-import { Flex } from "antd";
-import { ICards } from "../services/Data"; 
-
-
+import TableTasks from "../components/TableTasks";
+import { ITask } from "../services/DataInterfaces";
 
 export default function Boards(): JSX.Element {
   const [loading, setLoading] = useState(false);
   // const [cards, setCards] = useState([]);
-  const [cards, setCards] = useState(Cards);
-
+  const [tasks, setTasks] = useState([]);
 
   const navigate = useNavigate();
 
@@ -22,23 +17,41 @@ export default function Boards(): JSX.Element {
   }
 
   useEffect(() => {
-    // const todos = getAllToDo();
-    // todos.then((res) => {
-    //   console.log(res);
-    //   setCards(res);
-    // });
-   
+    setLoading(true);
+    const tasks = getAllTasks();
+    tasks.then((res) => {
+      console.log(res);
+      setTasks(res);
+      setLoading(false);
+    });
   }, []);
+
+  function handleUserTask(id:string): any {
+    setLoading(true);
+    const userTask = getUserTask(id)
+
+    userTask.then((res) => {
+      console.log(res);
+      setTasks(res);
+      setLoading(false);
+    });
+    console.log('get task User: ', id )
+  }
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   handleUserTask()
+  //     setLoading(false);
+  //   });
+  // }, []);
 
   return (
     <div>
-      <h1>Boards</h1>
-      <Flex wrap="wrap" gap="small" justify="space-around" align="center">
-        {loading && <p>Loading ... </p>}
-        {!loading &&
-          cards.map((card: ICards) => <CardItem card={card} key={card.userId} />)}
-      </Flex>
-      <MyButton onClick={handleClick}>На Главную</MyButton>
+      <h1>Tasks</h1>
+
+      {loading && <p>Loading ... </p>}
+      {!loading && <TableTasks data={tasks} handleUserTask={handleUserTask}/>}
+      <MyButton onClick={handleClick}>Home</MyButton>
     </div>
   );
 }
