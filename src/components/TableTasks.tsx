@@ -1,19 +1,20 @@
 import { Table, Space } from 'antd';
 import type { TableProps } from 'antd';
-import { ITask } from '../services/DataInterfaces';
+// import { ITask } from '../services/DataInterfaces';
 import MyButton from './MyButton';
+import { useDispatch, useSelector } from 'react-redux';
 // import { getUserTask } from '../services/DataService'; 
-import { FC } from 'react';
+// import { FC } from 'react';
+import { fetchUserTasks } from '../store/taskSlice'; 
 
-
-interface TasksProps {
-    data: ITask[]
-    handleUserTask: FC
-  }
+// interface TasksProps {
+//     // data: ITask[]
+//     handleUserTask: (userId: string) => void,
+//   }
 
   interface DataType {
-    userId: number;
-    id: number;
+    userId: string;
+    id: string;
     title: string;
     completed: boolean;
   }
@@ -29,16 +30,17 @@ interface TasksProps {
   //   console.log('get task User: ', id )
   // }S
 
-  export default function TableTasks ({data, handleUserTask}: TasksProps)  { 
-    console.log(data);
-
+  export default function TableTasks ()  { 
+    // console.log(data);
+    const data = useSelector(state => state.tasks.tasks);
+    const dispatch = useDispatch();
 
     const columns: TableProps<DataType>['columns'] = [
       {
         title: 'User ID',
         dataIndex: 'userId',
         key: 'userId',
-        render: (userId) => <a onClick={()=>handleUserTask(userId)}>{userId}</a>,
+        render: (userId) => <a onClick={()=>dispatch(fetchUserTasks(userId))}>{userId}</a>,
       },
         {
           title: 'Task ID',
