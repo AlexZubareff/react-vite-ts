@@ -5,7 +5,8 @@ import MyButton from './MyButton';
 import { useDispatch, useSelector } from 'react-redux';
 // import { getUserTask } from '../services/DataService'; 
 // import { FC } from 'react';
-import { fetchUserTasks } from '../store/taskSlice'; 
+import { fetchUserTasks, deleteTask } from '../store/taskSlice'; 
+
 
 // interface TasksProps {
 //     // data: ITask[]
@@ -20,10 +21,10 @@ import { fetchUserTasks } from '../store/taskSlice';
   }
 
 
-  function handleClick() {
-    console.log('delete task')
+  // function handleClick() {
+  //   console.log('delete task')
     
-  }
+  // }
 
   // function handleUserTask(id:string) {
   //   getUserTask(id)
@@ -46,7 +47,7 @@ import { fetchUserTasks } from '../store/taskSlice';
           title: 'Task ID',
           dataIndex: 'id',
           key: 'id',
-          render: (text) => <a>{text}</a>,
+          render: (id) => <a>{id}</a>,
         },
         {
           title: 'Task title',
@@ -63,10 +64,11 @@ import { fetchUserTasks } from '../store/taskSlice';
         },
         {
           title: 'Action',
-          key: 'action',
-          render: () => (
+          dataIndex: 'id',
+          key: 'id',
+          render: (id) => (
             <Space size="middle">
-              <MyButton onClick={handleClick}>Delete</MyButton>
+              <MyButton onClick={() => dispatch(deleteTask(id))}>Delete</MyButton>
             </Space>
           ),
         },
@@ -74,9 +76,7 @@ import { fetchUserTasks } from '../store/taskSlice';
 
     
     return(
-        <Table columns={columns} dataSource={data}
-
-         />
+        <Table columns={columns} dataSource={data}/>
     )
     
 };

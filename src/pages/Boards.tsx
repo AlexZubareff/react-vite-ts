@@ -1,26 +1,47 @@
 import { useNavigate } from "react-router-dom";
 import MyButton from "../components/MyButton";
-import {getAllTasks, getUserTask} from "../services/DataService";
-import { useEffect, useState } from "react";
+// import {getAllTasks, getUserTask} from "../services/DataService";
+import { useEffect } from "react";
 import TableTasks from "../components/TableTasks";
-import { fetchTasks, fetchUserTasks } from "../store/taskSlice"; 
+import { fetchTasks } from "../store/taskSlice"; 
 import { useDispatch, useSelector } from "react-redux"; 
+import { selectIsAuth } from "../store/authSlice";
+import { useAuth } from "../hooks/authHook";
+
 // import { ITask } from "../services/DataInterfaces";
 
 export default function Boards(): JSX.Element {
-  const [loading, setLoading] = useState(false);
-  // const [cards, setCards] = useState([]);
-  // const [tasks, setTasks] = useState([]);
 
+ 
+
+
+  // const {isAuth} = useSelector(state => state.auth);
+
+  const {isAuth, data} = useAuth();
+ 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+console.log(data);
 
-  // const tasks = useSelector(state => state.tasks.tasks);
 
-  function handleClick() {
-    navigate("/", { replace: true });
+  const {status, error} = useSelector(state => state.tasks);
+console.log(status, error);
+
+  // function handleClick() {
+  //   navigate("/", { replace: true });
+  // }
+
+  if(!isAuth){
+    navigate("/login", { replace: true });
   }
+
+  // useEffect(() => {
+  //   if(!isAuth){
+  //     navigate("/login", { replace: true });
+  //   }
+  // }, [isAuth]);
+
 
   useEffect(() => {
     dispatch(fetchTasks());
@@ -64,9 +85,10 @@ export default function Boards(): JSX.Element {
     <div>
       <h1>Tasks</h1>
 
-      {loading && <p>Loading ... </p>}
-      {!loading && <TableTasks/>}
-      <MyButton onClick={handleClick}>Home</MyButton>
+      {status === 'loading' && <p>Loading ... </p>}
+      {error && <h2>{error}</h2>}
+      <TableTasks/>
+      {/* <MyButton onClick={handleClick}>Home</MyButton> */}
     </div>
   );
 }

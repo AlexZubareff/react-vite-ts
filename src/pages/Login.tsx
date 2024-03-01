@@ -1,6 +1,6 @@
 import { Flex } from "antd";
 // import { useNavigate } from "react-router-dom";
-import  RegistrationForm  from '../components/RegistrationForm'
+import  LoginForm  from '../components/LoginForm'
 
 // type FieldType = {
 //   username?: string;
@@ -9,7 +9,7 @@ import  RegistrationForm  from '../components/RegistrationForm'
 //   email?: string;
 // };
 
-export default function Register(): JSX.Element {
+export default function Login(): JSX.Element {
   // const navigate = useNavigate();
 
   // const onFinish = (values: any) => {
@@ -23,12 +23,11 @@ export default function Register(): JSX.Element {
 
   return (
     <>
-      <h2>Регистрация</h2>
+      <h2>Вход</h2>
+
       <Flex  justify="center" align="center">
-      <RegistrationForm />
+      <LoginForm />
     </Flex>
-
-
 
       {/* <Form
         name="basic"
