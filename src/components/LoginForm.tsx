@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchAuth, selectIsAuth } from '../store/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../hooks/authHook';
+import { fetchTasksDummy } from '../store/taskSlice';
 
 
 
@@ -41,6 +42,7 @@ export default function RegistrationForm():JSX.Element {
 
       if (data.payload.token) {
         localStorage.setItem("token", data.payload.token);
+        dispatch(fetchTasksDummy(data.payload.token));
         navigate("/boards");
         
       }

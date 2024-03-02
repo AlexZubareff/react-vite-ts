@@ -1,17 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import MyButton from "../components/MyButton";
 import { Flex } from "antd";
-// import { TOKEN } from "../config/configAuth";
 import { useEffect } from "react";
 import { useAuth } from "../hooks/authHook";
+import { useDispatch } from "react-redux"; 
+import { auth } from "../store/authSlice";
+import { fetchTasksDummy } from "../store/taskSlice";
 
 
 export default function Home(): any {
   const navigate = useNavigate();
-  const {isAuth} = useAuth();
+  const {isAuth, data} = useAuth();
 
-  console.log(isAuth);
-  
+  console.log(data);
+
+  const dispatch = useDispatch();
+//   if(localStorage.getItem('token')) {
+//   dispatch(auth(true));
+//   dispatch(fetchTasksDummy(localStorage.getItem('token')));
+//   navigate("/boards", { replace: true });
+// }
+
+
   function handleClickRegistration() {
     navigate("/register", { replace: true });
   }
@@ -21,11 +31,11 @@ export default function Home(): any {
   }
   // const token = localStorage.getItem('token')
   useEffect(()=>{
-    
-    if (isAuth) {
-      return navigate("/boards",  { replace: true });
-      
-  }
+      if(localStorage.getItem('token')) {
+      dispatch(auth(true));
+      dispatch(fetchTasksDummy(localStorage.getItem('token')));
+      navigate("/boards", { replace: true });
+    }
   },[])
   
 

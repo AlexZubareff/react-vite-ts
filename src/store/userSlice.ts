@@ -126,7 +126,6 @@ const response = await fetch('https://dummyjson.com/users/add', {
       addUser(state, action) {
         state.user = action.payload;
         state.isAuth = true;
-        // localStorage.setItem('token', TOKEN);
         console.log(state.user);
     },
       isUserAuth(state) {
@@ -139,49 +138,7 @@ const response = await fetch('https://dummyjson.com/users/add', {
       },
 
     },
-    // extraReducers: (builder) => {
-    //   builder
-    //   .addCase(fetchTasks.pending, (state) => {
-    //     state.status = 'loading';
-    //     state.error = null;
-    //   })
-    //   .addCase(fetchTasks.fulfilled, (state, action) => {
-    //     state.status = 'resolved';
-    //     state.tasks = action.payload;
-    //   })
-    //   .addCase(fetchTasks.rejected, (state, action) => {
-    //     state.status = 'rejected';
-    //     state.error = action.payload;
-    //   })
-    //   .addCase(fetchTask.pending, (state) => {
-    //     state.status = 'loading';
-    //     state.error = null;
-    //   })
-    //   .addCase(fetchTask.fulfilled, (state, action) => {
-    //     state.status = 'resolved';
-    //     state.tasks = action.payload;
-    //   })
-    //   .addCase(fetchTask.rejected, (state, action) => {
-    //     state.status = 'rejected';
-    //     state.error = action.payload;
-    //   })
-    //   .addCase(fetchUserTasks.pending, (state) => {
-    //     state.status = 'loading';
-    //     state.error = null;
-    //   })
-    //   .addCase(fetchUserTasks.fulfilled, (state, action) => {
-    //     state.status = 'resolved';
-    //     state.tasks = action.payload;
-    //   })
-    //   .addCase(fetchUserTasks.rejected, (state, action) => {
-    //     state.status = 'rejected';
-    //     state.error = action.payload;
-    //   })
-    //   .addCase(deleteTask.rejected, (state, action) => {
-    //     state.status = 'rejected';
-    //     state.error = action.payload;
-    //   })
-    // }
+    
   })
 
 

@@ -166,6 +166,8 @@ const response = await fetch('https://dummyjson.com/users/add', {
 // console.log(auth);
 
 // }
+
+
 const initialState: authState = {
     data: {},
     isAuth: false,
@@ -208,40 +210,11 @@ const initialState: authState = {
         state.status = 'rejected';
         state.error = null;
       })
-      // .addCase(fetchRegister.pending, (state) => {
-      //   state.status = 'loading';
-      //   state.error = null;
-      // })
-      // .addCase(fetchRegister.fulfilled, (state, action) => {
-      //   state.status = 'resolved';
-      //   state.data = action.payload;
-      //   state.isAuth = true;
-      // })
-      // .addCase(fetchRegister.rejected, (state, action) => {
-      //   state.status = 'rejected';
-      //   state.error = action.payload;
-      // })
-    //   .addCase(fetchUserTasks.pending, (state) => {
-    //     state.status = 'loading';
-    //     state.error = null;
-    //   })
-    //   .addCase(fetchUserTasks.fulfilled, (state, action) => {
-    //     state.status = 'resolved';
-    //     state.tasks = action.payload;
-    //   })
-    //   .addCase(fetchUserTasks.rejected, (state, action) => {
-    //     state.status = 'rejected';
-    //     state.error = action.payload;
-    //   })
-    //   .addCase(deleteTask.rejected, (state, action) => {
-    //     state.status = 'rejected';
-    //     state.error = action.payload;
-    //   })
     }
   })
 
   
-  export const selectIsAuth = (state) => Boolean(state.auth.data);
+  // export const selectIsAuth = (state) => Boolean(state.auth.data);
   
   export const { logaut, auth, register} = authSlice.actions;
   export default authSlice.reducer;
