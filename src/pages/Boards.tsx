@@ -1,27 +1,21 @@
-import { useNavigate } from "react-router-dom";
-// import MyButton from "../components/MyButton";
 import { useEffect } from "react";
 import TableTasks from "../components/TableTasks";
-import { useSelector } from "react-redux";
 import { useAuth } from "../hooks/authHook";
+import { fetchTasksDummy } from "../store/taskSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 export default function Boards(): JSX.Element {
   const { isAuth } = useAuth();
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   console.log(isAuth);
 
-  const { status, error } = useSelector((state) => state.tasks);
-  // console.log(status, error);
-
-  // function handleClick() {
-  //   navigate("/", { replace: true });
-  // }
+  const { status, error } = useAppSelector((state) => state.tasks);
 
   useEffect(() => {
-    if (!isAuth) {
-      navigate("/login", { replace: true });
-    }
-  }, [isAuth]);
+    dispatch(fetchTasksDummy(localStorage.getItem("token")));
+  }, []);
+
+  
 
   return (
     <div>

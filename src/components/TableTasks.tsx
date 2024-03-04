@@ -1,21 +1,21 @@
 import { Table, Space } from "antd";
 import type { TableProps } from "antd";
 import MyButton from "./MyButton";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchUserTasks, deleteTask, fetchTask } from "../store/taskSlice";
+import { fetchUserTasks, fetchTask, fetchDeleteTask } from "../store/taskSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 interface DataType {
-  id: number;
+  id: string;
   todo: string;
   completed: boolean;
-  userId: number;
+  userId: string;
 }
 
 export default function TableTasks() {
-  const data = useSelector((state) => state.tasks);
+  const data = useAppSelector((state) => state.tasks);
   console.log("TODOS: ", data);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const columns: TableProps<DataType>["columns"] = [
     {
@@ -50,7 +50,7 @@ export default function TableTasks() {
       key: "id",
       render: (id) => (
         <Space size="middle">
-          <MyButton onClick={() => dispatch(deleteTask(id))}>Delete</MyButton>
+          <MyButton onClick={() => dispatch(fetchDeleteTask(id))}>Delete</MyButton>
         </Space>
       ),
     },
